@@ -31,6 +31,9 @@ public class Menuu extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View fMenu =  inflater.inflate(R.layout.fragment_menuu, container, false);
+        dbHelper = new IncidenciaDBHelper(getContext());
+        db = dbHelper.getWritableDatabase();
+
 
         Button btnAfegir = fMenu.findViewById(R.id.btn_add);
         btnAfegir.setOnClickListener(new View.OnClickListener() {
@@ -58,9 +61,15 @@ public class Menuu extends Fragment {
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.i("PROVES", "Button afegir click");
-                db.execSQL(SQL_BORRAR_CONTENIDO);
-                db.execSQL(SQL_BORRAR);
+                dbHelper.borrarAllIncidencias(db);
 
+
+
+            }
+        });
+        Button btnAjuda = fMenu.findViewById(R.id.btn_Ajuda);
+        btnAjuda.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
 
             }
         });
@@ -69,7 +78,7 @@ public class Menuu extends Fragment {
     public void MenuManager(Fragment parametro){
         FragmentManager menuManager = getFragmentManager();
         FragmentTransaction menuTransaction = menuManager.beginTransaction();
-        menuTransaction.replace(R.id.frameLayout, parametro);
+        menuTransaction.replace(R.id.frameLayoutPantallas, parametro);
 
         menuTransaction.commit();
     }

@@ -1,6 +1,8 @@
 package com.example.projectem9;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,11 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
-    List list = new ArrayList();
+    SharedPreferences datosguardados;
 
 
     @Override
@@ -22,13 +21,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Button button = findViewById(R.id.btn_login);
+        //ESTO SIRVE PARA PODER GUARDAR DATOS EN ALGUN SITIO, DONDE LE DAMOS UN NOMBRE
+        //QUE SERA LA KEY PARA PODER VER ESOS DATOS EN ALGUN MOMENTO
+        datosguardados = this.getSharedPreferences("Ajustes", Context.MODE_PRIVATE);
+
 
         final EditText username = findViewById(R.id.et_username);
         final EditText password = findViewById(R.id.et_contraseña);
 
-        //final TextView comprovador = findViewById(R.id.tv_login_validador);
 
+
+        final Button button = findViewById(R.id.btn_login);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
@@ -39,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
                 if(text_username.equals("admin") && text_password.equals("admin")){
                     //login OK
+                    datosguardados.edit().putString("Usuario",text_username).commit();
+                    datosguardados.edit().putString("password",text_password).commit();
                     goToMenu();
                 }else{
                     //login KO

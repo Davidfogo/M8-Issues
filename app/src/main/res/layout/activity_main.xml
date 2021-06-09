@@ -62,6 +62,7 @@
         android:ems="10"
         android:hint="Contrasenya"
         android:inputType="textPassword"
+        android:text="admin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,6 +80,7 @@
         android:ems="10"
         android:hint="Usuari"
         android:inputType="textPersonName"
+        android:text="admin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_login" />
